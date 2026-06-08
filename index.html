@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS Portfolio — Al Shahria Kayum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F7F4;
+    --card: #FFFFFF;
+    --primary: #66785F;
+    --primary-dark: #4d5f47;
+    --primary-light: #e8ede6;
+    --accent: #B08D57;
+    --accent-light: #f5eddf;
+    --text: #1E293B;
+    --text-muted: #64748B;
+    --text-light: #94A3B8;
+    --border: rgba(30,41,59,0.1);
+    --border-hover: rgba(30,41,59,0.2);
+    --font-display: 'Fraunces', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(30,41,59,0.07), 0 4px 16px rgba(30,41,59,0.06);
+    --shadow-hover: 0 4px 12px rgba(30,41,59,0.1), 0 16px 40px rgba(30,41,59,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,247,244,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--primary); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: var(--text);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(102,120,95,0.15) 39px, rgba(102,120,95,0.15) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(102,120,95,0.15) 39px, rgba(102,120,95,0.15) 40px);
+    background-color: #111827;
+  }
+  .hero-code-rain {
+    position: absolute; inset: 0; overflow: hidden; opacity: 0.06;
+    font-family: var(--font-mono); font-size: 11px; color: #66785F;
+    user-select: none; pointer-events: none;
+    display: flex; flex-wrap: wrap; gap: 0; align-content: flex-start;
+    padding: 2rem;
+    line-height: 1.6;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(17,24,39,0.7) 0%, rgba(17,24,39,0.4) 50%, rgba(102,120,95,0.3) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: heroFadeUp 1s ease both;
+  }
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    background: rgba(176,141,87,0.15); border: 1px solid rgba(176,141,87,0.3);
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    color: #F8F7F4; line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .hero-name span { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(248,247,244,0.65);
+    font-weight: 300; letter-spacing: 0.01em;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border-radius: 6px;
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .btn-primary {
+    background: var(--primary); color: #fff;
+    border-color: var(--primary);
+  }
+  .btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: #F8F7F4;
+    border-color: rgba(248,247,244,0.35);
+  }
+  .btn-outline:hover { background: rgba(248,247,244,0.1); border-color: rgba(248,247,244,0.6); transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(248,247,244,0.4); font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; font-family: var(--font-mono);
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(248,247,244,0.4), transparent);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 24px; height: 1px; background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    color: var(--text); line-height: 1.1;
+    margin-bottom: 3.5rem;
+  }
+  .section-title em { color: var(--primary); font-style: italic; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 280px 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .profile-photo-wrap {
+    position: relative;
+    width: 240px; height: 240px;
+  }
+  .profile-photo-frame {
+    width: 240px; height: 240px; border-radius: 50%;
+    background: var(--primary-light);
+    border: 3px solid var(--border);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .profile-photo-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .profile-photo-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--primary);
+  }
+  .profile-photo-placeholder svg { width: 56px; height: 56px; }
+  .profile-photo-placeholder span { font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); }
+  .profile-deco {
+    position: absolute; bottom: -8px; right: -8px;
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 2px solid var(--accent); opacity: 0.5;
+  }
+  .bio-text {
+    font-size: 1.05rem; line-height: 1.8; color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .bio-text strong { color: var(--text); font-weight: 600; }
+  .stats-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .stat-item {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem; font-weight: 700; letter-spacing: -0.04em;
+    color: var(--primary); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; font-family: var(--font-mono);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .stat-divider {
+    width: 1px; background: var(--border); align-self: stretch; margin: 4px 0;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: none; }
+  .education-section-wrap { background: var(--card); border-radius: 20px; border: 1px solid var(--border); padding: 4rem; }
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 2px;
+  }
+  .timeline-item { position: relative; margin-bottom: 3rem; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: -2.5rem; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--card); border: 2px solid var(--primary);
+    transform: translateX(-6px);
+    transition: background 0.2s;
+  }
+  .timeline-item:hover .timeline-dot { background: var(--primary); }
+  .timeline-period {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .timeline-degree {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
+    color: var(--text); letter-spacing: -0.02em; margin-bottom: 4px;
+  }
+  .timeline-school { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 8px; }
+  .timeline-gpa {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--primary-light); color: var(--primary-dark);
+    font-family: var(--font-mono); font-size: 0.75rem;
+    padding: 4px 12px; border-radius: 100px; font-weight: 500;
+  }
+
+  /* ── SKILLS ── */
+  .skills-groups { display: flex; flex-direction: column; gap: 2.5rem; }
+  .skill-group { }
+  .skill-group-title {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .skills-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 8px;
+    font-size: 0.875rem; font-weight: 500;
+    border: 1px solid; cursor: default;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .chip:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .chip-icon { font-size: 1rem; }
+  .chip-lang { background: #eef7ee; color: #2d6a2d; border-color: #c3e0c3; }
+  .chip-web  { background: #e8f4ff; color: #1a5fa8; border-color: #b8d9f5; }
+  .chip-tool { background: #fff4e6; color: #8a5c00; border-color: #f0d0a0; }
+  .chip-db   { background: #f3ecff; color: #5a2d9c; border-color: #d0b8f5; }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+  .project-img {
+    height: 190px;
+    background: linear-gradient(135deg, #1E293B 0%, #334155 50%, #66785F 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .project-img-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(248,247,244,0.4);
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .project-img-placeholder svg { width: 40px; height: 40px; opacity: 0.5; }
+  .project-num {
+    position: absolute; top: 16px; right: 16px;
+    font-family: var(--font-display); font-size: 3.5rem; font-weight: 700;
+    color: rgba(255,255,255,0.06); line-height: 1; user-select: none;
+  }
+  .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .project-title {
+    font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.5rem;
+  }
+  .project-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; flex: 1; margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .project-tag {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    background: var(--bg); color: var(--text-muted);
+    border: 1px solid var(--border); padding: 3px 10px;
+    border-radius: 4px; letter-spacing: 0.05em;
+  }
+  .project-links { display: flex; gap: 8px; }
+  .btn-sm {
+    flex: 1; text-align: center;
+    padding: 8px 14px; border-radius: 6px;
+    font-size: 0.8rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+    border: 1px solid;
+  }
+  .btn-sm-primary {
+    background: var(--primary); color: #fff; border-color: var(--primary);
+  }
+  .btn-sm-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+  .btn-sm-ghost {
+    background: transparent; color: var(--text-muted); border-color: var(--border);
+  }
+  .btn-sm-ghost:hover { border-color: var(--text-muted); color: var(--text); }
+
+  /* ── CONTACT ── */
+  #contact { background: none; }
+  .contact-wrap {
+    background: var(--text);
+    border-radius: 20px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1.2fr;
+  }
+  .contact-left { padding: 4rem; }
+  .contact-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    color: #F8F7F4; margin-bottom: 1rem;
+  }
+  .contact-heading em { color: var(--accent); font-style: italic; }
+  .contact-sub { color: rgba(248,247,244,0.5); font-size: 0.95rem; margin-bottom: 2.5rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(248,247,244,0.7); text-decoration: none;
+    font-size: 0.9rem; transition: color 0.2s;
+    padding: 12px 0; border-bottom: 1px solid rgba(248,247,244,0.08);
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(248,247,244,0.06); border: 1px solid rgba(248,247,244,0.1);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-link-icon svg { width: 18px; height: 18px; }
+  .contact-right {
+    background: rgba(248,247,244,0.03);
+    border-left: 1px solid rgba(248,247,244,0.08);
+    padding: 4rem; display: flex; flex-direction: column; justify-content: center;
+  }
+  .form-label {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(248,247,244,0.4); margin-bottom: 6px; display: block;
+  }
+  .form-input {
+    width: 100%; background: rgba(248,247,244,0.06);
+    border: 1px solid rgba(248,247,244,0.12);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 1.25rem;
+    color: rgba(248,247,244,0.9); font-family: var(--font-body); font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--primary); }
+  .form-input::placeholder { color: rgba(248,247,244,0.25); }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+  .form-note {
+    font-size: 0.78rem; color: rgba(248,247,244,0.35); margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+  }
+  .form-note a { color: var(--accent); text-decoration: none; }
+  .btn-accent {
+    background: var(--accent); color: #fff; border: none;
+    padding: 12px 28px; border-radius: 6px; font-weight: 500; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s; width: 100%;
+  }
+  .btn-accent:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--font-mono); font-size: 0.75rem;
+    color: var(--text-light); letter-spacing: 0.04em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ── UTILITIES ── */
+  .animate-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .animate-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .profile-photo-wrap { margin: 0 auto; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .contact-right { display: none; }
+    section { padding: 4rem 1.25rem; }
+    .education-section-wrap { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">Al Shahria Kayum</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding: 0; max-width: 100%; margin: 0;">
+  <div class="hero-bg"></div>
+  <div class="hero-code-rain" aria-hidden="true" id="codeRain"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
+      Available for opportunities
+    </div>
+    <h1 class="hero-name">[Your <span>Name</span>]</h1>
+    <p class="hero-sub">Computer Science Student &nbsp;|&nbsp; Aspiring Software Engineer</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        View Projects
+      </a>
+      <a href="#" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="animate-in">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About <em>Me</em></h2>
+  </div>
+  <div class="about-grid animate-in">
+    <div class="profile-photo-wrap">
+      <div class="profile-photo-frame">
+        <!-- REPLACE: swap this div for <img src="your-photo.jpg" alt="Your Name"> -->
+        <img src="photo.jpg" alt="Your Name" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="profile-deco"></div>
+    </div>
+    <div>
+      <p class="bio-text">
+        Hi! I'm <strong>Al Shahria Kayum</strong>, a passionate Computer Science student at
+          <strong>Daffodil International University</strong> with a deep interest in [e.g., <strong>development</strong>, <strong>artificial intelligence</strong>
+        , <strong>programming</strong>].
+      </p>
+      <p class="bio-text">
+        I love turning complex problems into simple, elegant solutions through code.
+         My coursework and hands-on projects have given me 
+        solid experience in <strong>C, C++, Python, Java, MySQL,</strong> and I’ve built projects
+         like <strong>Newton's Forward Interpolation Simulation</strong>, <strong>Student management System</strong>,
+          <strong>Library Management System with Database Connection.</strong>.
+      </p>
+      <p class="bio-text">
+        I’m actively looking for opportunities to apply my skills in real-world software development,
+         contribute to meaningful tech, and keep learning from every experience.
+          When I’m not coding, you’ll find me <strong>exploring open-source projects</strong>,
+           <strong>writing tech blogs</strong>, or <strong>playing chess</strong>.
+      </p>
+      <p class="bio-text">
+        Let’s connect and build something great together.
+      </p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Languages</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Internships</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">1</span>
+          <span class="stat-label">ICPC Participant</span>
+          <!-- REPLACE: Change to your own achievement -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="padding-top: 0; padding-bottom: 6rem;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 2rem;">
+    <div class="animate-in">
+      <p class="section-label">Academic Journey</p>
+      <h2 class="section-title">Edu<em>cation</em></h2>
+    </div>
+    <div class="education-section-wrap animate-in">
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-period">2024 — Present</p>
+          <!-- REPLACE: Update years when you graduate -->
+          <h3 class="timeline-degree">B.Sc. in Computer Science &amp; Engineering</h3>
+          <p class="timeline-school">Daffodil International University, Dhaka</p>
+          <span class="timeline-gpa">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            CGPA: 3.60 / 4.00
+            <!-- REPLACE: Your actual CGPA -->
+          </span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-period">2020 — 2022</p>
+          <!-- REPLACE: Update years -->
+          <h3 class="timeline-degree">Higher Secondary Certificate (HSC)</h3>
+          <p class="timeline-school">Darshana Government College, Chuadanga</p>
+          <!-- REPLACE: Your college name and city -->
+          <span class="timeline-gpa">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            GPA: 5.00 / 5.00
+            <!-- REPLACE: Your actual GPA -->
+          </span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-period">2018 — 2019</p>
+          <!-- REPLACE: Update years -->
+          <h3 class="timeline-degree">Secondary School Certificate (SSC)</h3>
+          <p class="timeline-school">Victoria Jubilee Govt. High School Chuadanga</p>
+          <!-- REPLACE: Your college name and city -->
+          <span class="timeline-gpa">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            GPA: 4.94 / 5.00
+            <!-- REPLACE: Your actual GPA -->
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="animate-in">
+    <p class="section-label">What I Work With</p>
+    <h2 class="section-title">Tech <em>Skills</em></h2>
+  </div>
+  <div class="skills-groups animate-in">
+
+    <div class="skill-group">
+      <p class="skill-group-title">Languages</p>
+      <div class="skills-chips">
+        <span class="chip chip-lang"><span class="chip-icon">🐍</span>Python</span>
+        <span class="chip chip-lang"><span class="chip-icon">☕</span>Java</span>
+        <span class="chip chip-lang"><span class="chip-icon">⚙️</span>C++</span>
+        <!-- <span class="chip chip-lang"><span class="chip-icon">🔷</span>TypeScript</span> -->
+        <!-- ADD/REMOVE: Add chips for any other languages you know -->
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <p class="skill-group-title">Web Development</p>
+      <div class="skills-chips">
+        <span class="chip chip-web"><span class="chip-icon">🌐</span>HTML</span>
+        <span class="chip chip-web"><span class="chip-icon">🎨</span>CSS</span>
+        <!-- <span class="chip chip-web"><span class="chip-icon">⚛️</span>React</span> -->
+        <span class="chip chip-web"><span class="chip-icon">🟨</span>JavaScript</span>
+        <!-- <span class="chip chip-web"><span class="chip-icon">🚀</span>Node.js</span> -->
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <p class="skill-group-title">Tools &amp; DevOps</p>
+      <div class="skills-chips">
+        <span class="chip chip-tool"><span class="chip-icon">🔧</span>Git</span>
+        <span class="chip chip-tool"><span class="chip-icon">💻</span>VS Code</span>
+        <!-- <span class="chip chip-tool"><span class="chip-icon">🐳</span>Docker</span> -->
+        <span class="chip chip-tool"><span class="chip-icon">🐧</span>Linux</span>
+        <!-- ADD: GitHub, Postman, Figma etc. -->
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <p class="skill-group-title">Databases</p>
+      <div class="skills-chips">
+        <span class="chip chip-db"><span class="chip-icon">🗄️</span>MySQL</span>
+        <!-- <span class="chip chip-db"><span class="chip-icon">🍃</span>MongoDB</span>
+        <span class="chip chip-db"><span class="chip-icon">🐘</span>PostgreSQL</span>
+        // ADD: Firebase, Redis etc. -->
+      </div>
+    </div> 
+    
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: none; padding-top: 0;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem;">
+    <div class="animate-in">
+      <p class="section-label">What I've Built</p>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+    </div>
+
+    <div class="projects-grid">
+
+  <!-- PROJECT 1 — Newton Interpolation (HAS live demo) -->
+  <article class="project-card animate-in">
+    <div class="project-img" style="background: linear-gradient(135deg, #1a2744 0%, #2d4a8a 100%);">
+      
+        <!-- <div class="project-img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        <span>Project Screenshot</span>
+      </div> -->
+
+      <img src="project1.png" alt="Project Name" style="width:100%;height:100%;object-fit:cover;">
+      <span class="project-num" aria-hidden="true">01</span>
+    </div>
+    <div class="project-body">
+      <h3 class="project-title">Newton Interpolation App</h3>
+      <p class="project-desc">
+        A numerical methods tool that implements Newton's Forward and Backward Interpolation formulas.
+        Given a set of data points, it estimates intermediate values — useful for mathematical
+        computation and engineering problems.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">HTML</span>
+        <span class="project-tag">Numerical Methods</span>
+        <span class="project-tag">Math</span>
+        <!-- REPLACE: update tags to match your actual tech stack -->
+      </div>
+      <div class="project-links">
+        <a href="https://newton-interpolation.vercel.app/" target="_blank" rel="noopener" class="btn-sm btn-sm-primary">
+          Live Demo
+        </a>
+        <!-- REPLACE: paste your actual live demo URL above -->
+        <a href="https://github.com/Al-Shahria-Kayum/newton-interpolation" target="_blank" rel="noopener" class="btn-sm btn-sm-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:-2px;margin-right:4px;" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PROJECT 2 — Library Management (NO live demo) -->
+  <article class="project-card animate-in" style="transition-delay: 0.1s;">
+    <div class="project-img" style="background: linear-gradient(135deg, #1c2b1a 0%, #3d6639 100%);">
+      
+        <!-- <div class="project-img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Project Screenshot</span>
+      </div> -->
+
+      <img src="project2.png" alt="Project Name" style="width:100%;height:100%;object-fit:cover;">
+
+      <span class="project-num" aria-hidden="true">02</span>
+    </div>
+    <div class="project-body">
+      <h3 class="project-title">Library Management System</h3>
+      <p class="project-desc">
+        A full-featured system to manage books, members, and borrowing records. Supports adding,
+        searching, issuing, and returning books with a clean interface and persistent data storage.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">PHP</span>
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">Bootsatrap</span>
+        <!-- REPLACE: update to your actual stack -->
+      </div>
+      <div class="project-links">
+        <!-- NO Live Demo button for this project -->
+        <a href="https://github.com/Al-Shahria-Kayum/Library_Management_System_DBMS" target="_blank" rel="noopener" class="btn-sm btn-sm-ghost" style="flex:1;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:-2px;margin-right:4px;" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <!-- REPLACE: swap REPLACE-WITH-LIBRARY-REPO-NAME with your actual repo name -->
+      </div>
+    </div>
+  </article>
+
+  <!-- PROJECT 3 — Student Management (NO live demo) -->
+  <article class="project-card animate-in" style="transition-delay: 0.2s;">
+    <div class="project-img" style="background: linear-gradient(135deg, #2b1c0e 0%, #7a4a18 100%);">
+      
+      <div class="project-img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Project Screenshot</span>
+      </div>
+      
+     <!-- <img src="project3.png" alt="Project Name" style="width:100%;height:100%;object-fit:cover;">   -->
+
+      <span class="project-num" aria-hidden="true">03</span>
+    </div>
+    <div class="project-body">
+      <h3 class="project-title">Student Management System</h3>
+      <p class="project-desc">
+        A desktop or web application to manage student records including enrollment, grades,
+        attendance, and course assignments. Built to handle CRUD operations efficiently.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">C</span>
+        <!-- <span class="project-tag">SQLite</span>
+        <span class="project-tag">Tkinter</span> -->
+        <!-- REPLACE: update to your actual stack -->
+      </div>
+      <div class="project-links">
+        <!-- NO Live Demo button for this project -->
+        <a href="https://github.com/Al-Shahria-Kayum/Student-Management-System-Using-C" target="_blank" rel="noopener" class="btn-sm btn-sm-ghost" style="flex:1;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:-2px;margin-right:4px;" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <!-- REPLACE: swap REPLACE-WITH-STUDENT-REPO-NAME with your actual repo name -->
+      </div>
+    </div>
+  </article>
+
+</div>
+
+    
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width: 100%; padding: 0 2rem 6rem; margin: 0 auto; max-width: 1100px;">
+  <div class="animate-in">
+    <p class="section-label">Get In Touch</p>
+  </div>
+  <div class="contact-wrap animate-in">
+    <div class="contact-left">
+      <h2 class="contact-heading">Let's <em>Connect!</em></h2>
+      <p class="contact-sub">I'm always open to new opportunities, collaborations, or just a good conversation about tech.</p>
+      <div class="contact-links">
+        <a href="mailto:alshahriakayum@gmail.com" class="contact-link">
+          <!-- REPLACE: href="mailto:youremail@gmail.com" -->
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: rgba(248,247,244,0.35); font-family: 'DM Mono', monospace; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.08em;">Email</div>
+            alshahriakayum@gmail.com
+          </div>
+        </a>
+        <a href="www.linkedin.com/in/al-shahria-kayum" target="_blank" rel="noopener" class="contact-link">
+          <!-- REPLACE: Your LinkedIn profile URL -->
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: rgba(248,247,244,0.35); font-family: 'DM Mono', monospace; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.08em;">LinkedIn</div>
+            linkedin.com/in/al-shahria-kayum
+          </div>
+        </a>
+        <a href="https://github.com/Al-Shahria-Kayum" target="_blank" rel="noopener" class="contact-link">
+          <!-- REPLACE: Your GitHub username -->
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: rgba(248,247,244,0.35); font-family: 'DM Mono', monospace; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.08em;">GitHub</div>
+            github.com/Al-Shahria-Kayum
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="contact-right">
+      <p style="font-size: 0.78rem; color: rgba(248,247,244,0.35); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem;">Quick Message</p>
+      <label class="form-label" for="name">Your Name</label>
+      <input type="text" id="name" class="form-input" placeholder="[Visitor Name]">
+      <label class="form-label" for="email">Email</label>
+      <input type="email" id="email" class="form-input" placeholder="visitor@example.com">
+      <label class="form-label" for="message">Message</label>
+      <textarea id="message" class="form-input" placeholder="Say something nice..."></textarea>
+      <p class="form-note">
+        // REPLACE: Embed your Google Form here, or use a form service like Formspree
+        Or embed a <a href="#">Google Form</a> in place of this section.
+      </p>
+      <button class="btn-accent" type="button">Send Message ↗</button>
+    </div> -->
+
+    <div class="contact-right" style="padding: 2rem;">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeIrAkppZmiYvzl0IvlomGIbwklgzMEnqL4KzJBjmqQ94D0aQ/viewform?embedded=true" 
+  width="640" 
+  height="689" 
+  frameborder="0" 
+  marginheight="0" 
+  marginwidth="0">
+  Loading…
+  </iframe>
+</div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© <span id="year"></span> <span>Al Shahria Kayum</span>. .</p>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+  // Hero code rain text
+  const snippets = [
+    'def solve(n):', '  if n == 0:', '    return 1', '  return n*solve(n-1)',
+    'class Node {', '  int val;', '  Node next;', '}',
+    'SELECT * FROM', 'users WHERE', 'active = true',
+    'git commit -m', '"feat: add auth"', 'git push origin',
+    'docker build .', '-t myapp:latest', 'docker run -p',
+    'npm install', 'npm run build', 'export default',
+    'const [state,', 'setState] =', 'useState(null)',
+    'async function', 'fetchData() {', '  const res =',
+    '  await fetch(', '    "/api/data"', '  );',
+    'import React', 'from "react"',
+    '// TODO: fix', '// this later',
+    '<!DOCTYPE html>', '<html lang="en">', '<meta charset=',
+    'border-radius:', '12px;', 'display: flex;',
+    'O(n log n)', 'binary search', 'hash table',
+  ];
+  const rain = document.getElementById('codeRain');
+  let html = '';
+  for (let i = 0; i < 400; i++) {
+    html += '<span style="padding:0 6px;">' + snippets[i % snippets.length] + '</span>';
+  }
+  rain.innerHTML = html;
+</script>
+</body>
+</html>
